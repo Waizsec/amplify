@@ -27,9 +27,15 @@ const RecordAudio = (props) => {
     return (
         <>
             <div className="overflow-hidden">
-                <div className="absolute right-0 top-[13.5vw] flex flex-col">
-                    <button className={`rotate-90 px-[0.7vw] my-[2vw] py-[0.2vw] text-[0.7vw]  border-[0.2vw] border-black ${props.mode != 'input' ? "bg-black text-white" : ""}`} onClick={() => props.onModeUpdate('record')}>RECORD</button>
-                    <button className={`rotate-90 px-[0.7vw] my-[2vw] py-[0.2vw] text-[0.7vw]  border-[0.2vw] border-black ${props.mode == 'input' ? "bg-black text-white" : ""}`} onClick={() => props.onModeUpdate('input')}>INPUT</button>
+                <div className="absolute right-0 top-[13.5vw] flex flex-col z-[20]
+                    portrait:bottom-[-2vw] portrait:top-auto portrait:fixed portrait:flex-row
+                ">
+                    <button className={`rotate-90 px-[0.7vw] my-[2vw] py-[0.2vw] text-[0.7vw]  border-[0.2vw] border-black ${props.mode != 'input' ? "bg-black text-white" : "bg-primary"}
+                        portrait:rotate-0  portrait:py-[4vw] portrait:px-[3vw] portrait:text-[3vw]
+                    `} onClick={() => props.onModeUpdate('record')}>RECORD</button>
+                    <button className={`rotate-90 px-[0.7vw] my-[2vw] py-[0.2vw] text-[0.7vw]  border-[0.2vw] border-black ${props.mode == 'input' ? "bg-black text-white" : "bg-primary"}
+                        portrait:rotate-0  portrait:py-[4vw] portrait:px-[3vw] portrait:text-[3vw]
+                    `} onClick={() => props.onModeUpdate('input')}>INPUT</button>
                 </div>
 
                 {recordingStatus == 'record' ? (

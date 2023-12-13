@@ -50,7 +50,7 @@
 
 /* Apply the animation to an element */
 .animate-custom-spin {
-  animation: animate-custom-spin 1s linear infinite;
+  animation: animate-custom-spin 3s linear infinite;
   transform-origin: center;
 }
 
@@ -80,7 +80,6 @@
     transform: rotate(-35deg);
   }
 }
-
 @keyframes discPlay {
   0% {
     left: 0;
@@ -100,6 +99,28 @@
     left: 0vw;
   }
 }
+@media (orientation: portrait) {
+  @keyframes discPlay {
+    0% {
+      left: 0;
+    }
+    100% {
+      left: 12vw;
+    }
+  }
+  @keyframes discStop {
+    0% {
+      left: 12vw;
+    }
+    30%{
+      left: 12vw;
+    }
+    100% {
+      left: 0vw;
+    }
+  }
+}
+
 
 .disc-play{
   animation: discPlay 1s forwards;
@@ -135,3 +156,18 @@
   }
 }
 
+
+.animate-scroll{
+  animation: animatescroll 40s ease-in-out forwards infinite;
+}
+@keyframes animatescroll {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-50vw);
+  }
+  100%{
+    transform: translateX(0vw);
+  }
+}

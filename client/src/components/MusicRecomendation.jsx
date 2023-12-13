@@ -5,6 +5,36 @@ const MusicRecomendation = (props) => {
     const [dots, setDots] = useState('.');
     const containerRef = useRef(null);
     const [randomSong, setRandomSong] = useState()
+    const [isScrolled, setisScrolled] = useState(false);
+
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const container = containerRef.current;
+
+            if (container) {
+                const isContainerScrolledHorizontally = container.scrollLeft > 0;
+
+                setisScrolled(true);
+                const newTimeoutId = setTimeout(() => {
+                    setisScrolled(false);
+                }, 10000);
+            }
+        };
+
+        // Use 'scroll' event on the container element
+        if (containerRef.current) {
+            containerRef.current.addEventListener('scroll', handleScroll);
+        }
+
+        return () => {
+            // Cleanup the event listener
+            if (containerRef.current) {
+                containerRef.current.removeEventListener('scroll', handleScroll);
+            }
+        };
+    }, []);
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -20,9 +50,6 @@ const MusicRecomendation = (props) => {
         fetchData();
     }, []);
 
-    useEffect(() => {
-        containerRef.current.scrollLeft = containerRef.current.scrollWidth;
-    }, []);
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -43,64 +70,86 @@ const MusicRecomendation = (props) => {
     }
     return (
         <>
-            <div className="w-[50vw] mt-[2vw]">
-                <h1 className="text-[1.6vw] w-[30vw] ml-[2vw]">Music Recomendation</h1>
-                <div className="flex ml-[2vw]">
+            <div className="w-[50vw] mt-[2vw]
+                portrait:w-[100vw] portrait:mt-[10vw]
+            ">
+                <h1 className="text-[1.6vw] w-[30vw] ml-[2vw]
+                    portrait:text-[5vw] portrait:ml-[6vw]
+                ">Music Recomendation</h1>
+                <div className="flex ml-[2vw]
+                    portrait:ml-[6vw]
+                ">
                     {props.loading ? (
                         <>
                             <p className="text-[0.6vw] py-[0.5vw] text-[#8888]">Identifying audio{dots}</p>
                         </>
                     ) : props.data.genre != null ? (
                         <>
-                            <p className="px-[1vw] py-[0.5vw] rounded-[0.3vw] mt-[1vw] text-[0.6vw] border-[0.2vw] border-black mr-[1vw] bg-black text-white">
+                            <p className="px-[1vw] py-[0.5vw] rounded-[0.3vw] mt-[1vw] text-[0.6vw] border-[0.2vw] border-black mr-[1vw] bg-black text-white
+                                 portrait:text-[2vw] portrait:mt-[4vw] portrait:px-[3vw] portrait:py-[2vw] portrait:rounded-[1vw]
+                            ">
                                 {props.data.genre}
                             </p>
-                            <p className="px-[1vw] py-[0.5vw] rounded-[0.3vw] mt-[1vw] text-[0.6vw] border-[0.2vw] border-black mr-[1vw]">
+                            <p className="px-[1vw] py-[0.5vw] rounded-[0.3vw] mt-[1vw] text-[0.6vw] border-[0.2vw] border-black mr-[1vw]
+                                 portrait:text-[2vw] portrait:mt-[4vw] portrait:px-[3vw] portrait:py-[2vw] portrait:rounded-[1vw]
+                            ">
                                 {props.data.Key}
                             </p>
-                            <p className="px-[1vw] py-[0.5vw] rounded-[0.3vw] mt-[1vw] text-[0.6vw] border-[0.2vw] border-black mr-[1vw]">
+                            <p className="px-[1vw] py-[0.5vw] rounded-[0.3vw] mt-[1vw] text-[0.6vw] border-[0.2vw] border-black mr-[1vw]
+                                 portrait:text-[2vw] portrait:mt-[4vw] portrait:px-[3vw] portrait:py-[2vw] portrait:rounded-[1vw]
+                            ">
                                 {props.data.Mode}
                             </p>
                         </>
 
                     ) : (
-                        <p className="px-[1vw] py-[0.5vw] rounded-[0.3vw] mt-[1vw] text-[0.6vw] border-[0.2vw] border-black mr-[1vw] bg-black text-white">
+                        <p className="px-[1vw] py-[0.5vw] rounded-[0.3vw] mt-[1vw] text-[0.6vw] border-[0.2vw] border-black mr-[1vw] bg-black text-white
+                            portrait:text-[2vw] portrait:mt-[4vw] portrait:px-[3vw] portrait:py-[2vw]
+                        ">
                             All
                         </p>
                     )}
                 </div>
 
-                <div className="flex overflow-x-scroll mt-[2vw] relative border-r-[0.2vw] border-[#3e3e3e] py-[1vw]" ref={containerRef}>
-                    <div className="flex pr-[3vw] pl-[1vw]">
+                <div className="flex overflow-x-scroll mt-[2vw] relative border-r-[0.2vw] border-[#3e3e3e] py-[1vw] portrait:mt-[5vw] portrait:border-none" ref={containerRef}>
+                    <div className={`flex pr-[3vw] pl-[1vw] ${isScrolled || props.loading ? "" : "animate-scroll"} portrait:pr-0 portrait:pl-0`}>
                         {props.loading ? (
                             <>
-                                <p className="text-[#8888] ml-[2vw] py-[10vw] text-[1vw]">Finding Best Music For You{dots}</p>
+                                <p className="text-[#8888] ml-[2vw] py-[10vw] text-[1vw] portrait:text-[2.8vw] portrait:ml-[8vw]">Finding Best Music For You{dots}</p>
                             </>
                         ) : props.songs[0].artist != null ? (
                             props.songs.map((item, index) => (
-                                <a href={item.link} target="_blank" className="w-[15vw] ml-[1.8vw] flex flex-col justify-start" key={index}>
-                                    <img src={item.albumImage} className="w-full rounded-[0.3vw] h-[15vw] object-cover" alt="" />
+                                <div className="w-[15vw] ml-[1.8vw] flex flex-col justify-start
+                                    portrait:w-[40vw] portrait:ml-[4vw]
+                                " key={index}>
+                                    <img src={item.albumImage} className="w-full rounded-[0.3vw] h-[15vw] object-cover
+                                        portrait:w-[40vw] portrait:h-[40vw] portrait:rounded-[2vw]
+                                    "  />
                                     <div className="flex justify-between items-center mt-[0.4vw]">
                                         <div className="ml-[0.2vw]">
-                                            <p className="mt-[0.3vw] text-[0.8vw]">{truncateString(item.trackName, 3)}</p>
-                                            <p className="text-[0.5vw]">- {truncateString(item.artist, 4)}</p>
+                                            <p className="mt-[0.3vw] text-[0.8vw] portrait:text-[3vw]">{truncateString(item.trackName, 3)}</p>
+                                            <p className="text-[0.5vw] portrait:text-[1.5vw]">- {truncateString(item.artist, 4)}</p>
                                         </div>
-                                        <img src={play} className="w-[1.6vw] cursor-pointer" alt="" />
+                                        <img src={play} className="w-[1.6vw] cursor-pointer portrait:w-[5vw]" onClick={() => props.onPreviewUpdate({ pre: item.preview_url, img: item.albumImage, name: item.trackName })} alt="" />
                                     </div>
-                                </a>
+                                </div>
                             ))
                         ) : randomSong != null ? (
                             randomSong.map((item, index) => (
-                                <a href={item.link} target="_blank" className="w-[15vw] ml-[1.8vw] flex flex-col justify-start" key={index}>
-                                    <img src={item.albumImage} className="w-full rounded-[0.3vw] h-[15vw] object-cover" alt="" />
+                                <div className="w-[15vw] ml-[1.8vw] flex flex-col justify-start
+                                    portrait:w-[40vw] portrait:ml-[4vw]
+                                " key={index}>
+                                    <img src={item.albumImage} className="w-full rounded-[0.3vw] h-[15vw] object-cover
+                                        portrait:w-[40vw] portrait:h-[40vw] portrait:rounded-[2vw]
+                                    "  />
                                     <div className="flex justify-between items-center mt-[0.4vw]">
                                         <div className="ml-[0.2vw]">
-                                            <p className="mt-[0.3vw] text-[0.8vw]">{truncateString(item.trackName, 3)}</p>
-                                            <p className="text-[0.5vw]">- {truncateString(item.artist, 4)}</p>
+                                            <p className="mt-[0.3vw] text-[0.8vw] portrait:text-[3vw]">{truncateString(item.trackName, 3)}</p>
+                                            <p className="text-[0.5vw] portrait:text-[1.5vw]">- {truncateString(item.artist, 4)}</p>
                                         </div>
-                                        <img src={play} className="w-[1.6vw] cursor-pointer" alt="" />
+                                        <img src={play} className="w-[1.6vw] cursor-pointer portrait:w-[5vw]" onClick={() => props.onPreviewUpdate({ pre: item.preview_url, img: item.albumImage, name: item.trackName })} alt="" />
                                     </div>
-                                </a>
+                                </div>
                             ))
                         ) : (
                             <div className=""></div>
@@ -112,8 +161,8 @@ const MusicRecomendation = (props) => {
                 {props.loading ? (
                     <>
 
-                        <div className="flex mt-[1vw] ml-[2vw] w-full">
-                            <p className="text-[0.6vw] py-[0.5vw] text-[#8888]">Creating Playlist{dots}</p>
+                        <div className="flex mt-[1vw] ml-[2vw] w-full portrait:ml-[8vw]">
+                            <p className="text-[0.6vw] py-[0.5vw] text-[#8888] portrait:text-[2vw]">Creating Playlist{dots}</p>
                         </div>
 
                     </>

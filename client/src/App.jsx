@@ -6,6 +6,7 @@ function App() {
   const [songs, setSongs] = useState([{}])
   const [loading, setLoading] = useState(false)
   const [mode, setMode] = useState("input");
+  const [preview, setPreview] = useState()
 
   const updateMode = (newData) => {
     setMode(newData);
@@ -19,6 +20,9 @@ function App() {
     setLoading(newData);
   };
 
+  const updatePreview = (newData) => {
+    setPreview(newData);
+  };
 
   // Run jika data dari audio sudah dieksekusi (Mau itu record maupun input)
   useEffect(() => {
@@ -51,18 +55,18 @@ function App() {
     }
   }, [data]);
 
-
-
   return (
     <>
       <Splash />
       <Welcome />
       <div className="relative">
         <Navbar />
-        <div className="w-full py-[3vw] flex">
-          <MusicRecomendation data={data} loading={loading} songs={songs} />
+        <div className="w-full py-[3vw] flex
+          portrait:flex-col-reverse
+        ">
+          <MusicRecomendation data={data} loading={loading} songs={songs} onPreviewUpdate={updatePreview} />
           {mode == 'input' ? (
-            <AudioInput onDataUpdate={updateData} onLoadingUpdate={updateLoading} onModeUpdate={updateMode} mode={mode} />
+            <AudioInput onDataUpdate={updateData} onLoadingUpdate={updateLoading} onModeUpdate={updateMode} mode={mode} preview={preview} onPreviewUpdate={updatePreview} />
           ) : (
             <RecordAudio onDataUpdate={updateData} onLoadingUpdate={updateLoading} onModeUpdate={updateMode} mode={mode} />
           )}
