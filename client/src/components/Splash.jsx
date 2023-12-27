@@ -15,13 +15,13 @@ const Splash = () => {
 
     const newTimeoutId = setTimeout(() => {
         setSplashScreen(false)
-    }, 1000);
+    }, 4000);
     return (
         <>
             {/* Splash Screen */}
-            <div className={`${splashScreen == false ? "hidden" : ""} fixed w-[100vw] h-screen bg-primary z-[20] flex flex-col items-center justify-center`}>
-                <h1 className="normal-font font-bold text-[4vw]">AMPLIFY</h1>
-                <img src={vinyl2} className="w-[13vw] animate-spin" alt="" />
+            <div className={`${splashScreen == false ? "hidden" : ""} fixed w-[100vw] h-screen bg-primary flex flex-col items-center justify-center z-[1000]`}>
+                <h1 className="normal-font font-bold text-[4vw] portrait:text-[7vw] ">AMPLIFY</h1>
+                <img src={vinyl2} className="w-[13vw] animate-spin portrait:w-[30vw] portrait:my-[3vw]" alt="" />
                 <p className="text-[#8888] mt-[1vw]">Loading Page{dots}</p>
             </div>
         </>

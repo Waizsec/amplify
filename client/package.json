@@ -10,9 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "audio-recorder-polyfill": "^0.4.1",
     "file-saver": "^2.0.5",
     "lamejs": "^1.2.1",
-    "mic-recorder-to-mp3": "^2.2.2",
+    "mic-recorder-to-mp3": "github:NikolaBalaban/mic-recorder-to-mp3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "recorder-js": "^1.0.7"

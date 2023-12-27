@@ -3,7 +3,7 @@ import { MusicRecomendation, Navbar, Splash, Welcome, AudioInput, RecordAudio } 
 
 function App() {
   const [data, setData] = useState([{}])
-  const [songs, setSongs] = useState([{}])
+  const [songs, setSongs] = useState(null)
   const [loading, setLoading] = useState(false)
   const [mode, setMode] = useState("input");
   const [preview, setPreview] = useState()
@@ -44,6 +44,7 @@ function App() {
 
       // Fetch data from the endpoint with the constructed query string
       fetch(`http://127.0.0.1:5000/getrecomendation?${queryString}`)
+        // fetch(`https://wisnudanuarta.pythonanywhere.com/getrecomendation?${queryString}`)
         .then(res => res.json())
         .then(songs => {
           setSongs(songs);
@@ -73,6 +74,7 @@ function App() {
 
         </div>
       </div>
+      <div className="landscape:hidden h-[20vw]"></div>
     </>
   )
 }

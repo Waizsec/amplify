@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { cover1, play } from '../assets'
+import { playlists } from '../constant';
 
 const MusicRecomendation = (props) => {
     const [dots, setDots] = useState('.');
@@ -40,6 +41,7 @@ const MusicRecomendation = (props) => {
         const fetchData = async () => {
             try {
                 const response = await fetch('http://127.0.0.1:5000/getrandom');
+                // const response = await fetch('https://wisnudanuarta.pythonanywhere.com/getrandom');
                 const data = await response.json();
                 setRandomSong(data);
             } catch (error) {
@@ -68,6 +70,7 @@ const MusicRecomendation = (props) => {
         const truncatedWords = words.slice(0, maxWords);
         return truncatedWords.join(' ') + '...';
     }
+
     return (
         <>
             <div className="w-[50vw] mt-[2vw]
@@ -81,7 +84,7 @@ const MusicRecomendation = (props) => {
                 ">
                     {props.loading ? (
                         <>
-                            <p className="text-[0.6vw] py-[0.5vw] text-[#8888]">Identifying audio{dots}</p>
+                            <p className="text-[0.6vw] py-[0.5vw] text-[#8888] portrait:text-[2vw]">Identifying audio{dots}</p>
                         </>
                     ) : props.data.genre != null ? (
                         <>
@@ -117,7 +120,7 @@ const MusicRecomendation = (props) => {
                             <>
                                 <p className="text-[#8888] ml-[2vw] py-[10vw] text-[1vw] portrait:text-[2.8vw] portrait:ml-[8vw]">Finding Best Music For You{dots}</p>
                             </>
-                        ) : props.songs[0].artist != null ? (
+                        ) : props.songs != null ? (
                             props.songs.map((item, index) => (
                                 <div className="w-[15vw] ml-[1.8vw] flex flex-col justify-start
                                     portrait:w-[40vw] portrait:ml-[4vw]
@@ -161,37 +164,43 @@ const MusicRecomendation = (props) => {
                 {props.loading ? (
                     <>
 
-                        <div className="flex mt-[1vw] ml-[2vw] w-full portrait:ml-[8vw]">
+                        <div className="flex mt-[1vw] ml-[2vw] w-full portrait:ml-[8vw] portrait:w-[80vw]">
                             <p className="text-[0.6vw] py-[0.5vw] text-[#8888] portrait:text-[2vw]">Creating Playlist{dots}</p>
                         </div>
 
                     </>
                 ) : props.data.genre != null ? (
                     <>
-                        <h1 className="text-[1.2vw] w-[28vw] ml-[2vw] mt-[1vw]">Check Our Most Famous Playlist</h1>
-                        <div className="flex mt-[1vw] ml-[2vw] w-full">
-                            <img src={cover1} className="w-[6vw] rounded-[0.4vw]" alt="" />
-                            <div className="ml-[1vw] mt-[1vw]">
-                                <p className="text-[0.5vw]">Metal</p>
-                                <p className="text-[0.7vw]">Playlist User #00001</p>
+                        <h1 className="text-[1.2vw] w-[28vw] ml-[2vw] mt-[1vw] portrait:text-[3vw] portrait:w-[80vw] portrait:ml-[6vw]">Check Our Most Famous Playlist</h1>
+                        <div className="flex mt-[1vw] ml-[2vw] w-full portrait:ml-[6vw] portrait:w-[80vw] portrait:mt-[4vw]">
+                            <img src={cover1} className="w-[6vw] rounded-[0.5vw] portrait:rounded-[2vw] portrait:w-[30vw]" alt="" />
+                            <div className="ml-[1vw] mt-[1vw] portrait:ml-[3vw]">
+                                <p className="text-[0.5vw] portrait:text-[3vw]">AMPLIFY  </p>
+                                <p className="text-[0.9vw] portrait:text-[2.5vw]">Playlist : {props.data.genre}</p>
                             </div>
                             <div className="w-full flex items-center justify-end mr-[5vw]">
-                                <a href="" className="text-[0.6vw] ml-[10vw] self-center px-[1vw] py-[0.4vw] bg-black text-white">Open Playlist</a>
+                                {/* Conditionally set the href based on the genre */}
+                                <a
+                                    href={props.data.genre in playlists ? playlists[props.data.genre] : ''} target='_blank'
+                                    className="text-[0.6vw] ml-[10vw] self-center px-[1vw] py-[0.4vw] bg-black text-white portrait:text-[2vw] portrait:py-[2vw] portrait:px-[4vw] portrait:rounded-[2vw]"
+                                >
+                                    Open Playlist
+                                </a>
                             </div>
                         </div>
                     </>
 
                 ) : (
                     <>
-                        <h1 className="text-[1.2vw] w-[28vw] ml-[2vw] mt-[1vw]">Check Our Most Famous Playlist</h1>
-                        <div className="flex mt-[1vw] ml-[2vw] w-full">
-                            <img src={cover1} className="w-[6vw] rounded-[0.4vw]" alt="" />
-                            <div className="ml-[1vw] mt-[1vw]">
-                                <p className="text-[0.5vw]">Metal</p>
-                                <p className="text-[0.7vw]">Playlist User #00001</p>
+                        <h1 className="text-[1.2vw] w-[28vw] ml-[2vw] mt-[1vw] portrait:text-[3vw] portrait:w-[80vw] portrait:ml-[6vw]">Check Our Most Famous Playlist</h1>
+                        <div className="flex mt-[1vw] ml-[2vw] w-full portrait:ml-[6vw] portrait:w-[80vw] portrait:mt-[4vw]">
+                            <img src={cover1} className="w-[6vw] rounded-[0.5vw] portrait:rounded-[2vw] portrait:w-[30vw]" alt="" />
+                            <div className="ml-[1vw] mt-[1vw] portrait:ml-[3vw]">
+                                <p className="text-[0.5vw] portrait:text-[3vw]">Amplify</p>
+                                <p className="text-[0.7vw] portrait:text-[2.5vw]">Favorite Playlist #00001</p>
                             </div>
                             <div className="w-full flex items-center justify-end mr-[5vw]">
-                                <a href="" className="text-[0.6vw] ml-[10vw] self-center px-[1vw] py-[0.4vw] bg-black text-white">Open Playlist</a>
+                                <a href="" className="text-[0.6vw] ml-[10vw] self-center px-[1vw] py-[0.4vw] bg-black text-white portrait:text-[2vw] portrait:py-[2vw] portrait:px-[4vw] portrait:rounded-[2vw]">Open Playlist</a>
                             </div>
                         </div>
                     </>
