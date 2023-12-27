@@ -156,6 +156,24 @@
   }
 }
 
+.open-page{
+  animation: open-page 2s ease-in-out forwards;
+}
+
+@keyframes open-page {
+  0% {
+    height: 0;
+    opacity: 0;
+  }
+  30%{
+    opacity: 1;
+  }
+  100% {
+    height: 100vh;
+    opacity: 1;
+  }
+}
+
 
 .animate-scroll{
   animation: animatescroll 40s ease-in-out forwards infinite;

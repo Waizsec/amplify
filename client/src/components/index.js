@@ -4,6 +4,7 @@ import Navbar from './Navbar'
 import MusicRecomendation from './MusicRecomendation'
 import AudioInput from "./AudioInput";
 import RecordAudio from "./RecordAudio";
+import AboutUs from './AboutUs';
 
 
 export{
@@ -12,5 +13,6 @@ export{
     Navbar,
     MusicRecomendation,
     AudioInput,
-    RecordAudio
+    RecordAudio,
+    AboutUs
 }

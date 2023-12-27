@@ -200,7 +200,7 @@ const MusicRecomendation = (props) => {
                                 <p className="text-[0.7vw] portrait:text-[2.5vw]">Favorite Playlist #00001</p>
                             </div>
                             <div className="w-full flex items-center justify-end mr-[5vw]">
-                                <a href="" className="text-[0.6vw] ml-[10vw] self-center px-[1vw] py-[0.4vw] bg-black text-white portrait:text-[2vw] portrait:py-[2vw] portrait:px-[4vw] portrait:rounded-[2vw]">Open Playlist</a>
+                                <a href="https://open.spotify.com/playlist/7vz2283O2eaMWBNMZlqQfp?si=VTA4BXhdRs-oWnvInUbooA" target='_blank' className="text-[0.6vw] ml-[10vw] self-center px-[1vw] py-[0.4vw] bg-black text-white portrait:text-[2vw] portrait:py-[2vw] portrait:px-[4vw] portrait:rounded-[2vw]">Open Playlist</a>
                             </div>
                         </div>
                     </>
