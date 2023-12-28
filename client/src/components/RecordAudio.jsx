@@ -71,8 +71,8 @@ const RecordAudio = (props) => {
 
             const formData = new FormData();
             formData.append('audio_file', new File(buffer, 'recording.mp3', { type: blob.type }));
-            // const response = await fetch('https://wisnudanuarta.pythonanywhere.com/startrecording', {
-            const response = await fetch('http://127.0.0.1:5000/startrecording', {
+            const response = await fetch('https://wisnudanuarta.pythonanywhere.com/startrecording', {
+                // const response = await fetch('http://127.0.0.1:5000/startrecording', {
                 method: 'POST',
                 body: formData,
             });

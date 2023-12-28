@@ -2,11 +2,17 @@ import React, { useState } from 'react'
 import { icon } from '../assets'
 
 const Welcome = () => {
-    const [welcome, setWelcome] = useState(false);
+    const [welcome, setWelcome] = useState(() => {
+        const storedWelcome = sessionStorage.getItem('welcome');
+        return storedWelcome === null ? false : true;
+    });
+
     const closePage = (e) => {
         e.preventDefault();
         setWelcome(true);
+        sessionStorage.setItem('welcome', 'true');
     };
+
     return (
         <>
             <div className={`h-[100vh] w-full flex items-center justify-center relative ${welcome == true ? "close-page" : ""} overflow-hidden fixed

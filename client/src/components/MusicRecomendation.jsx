@@ -40,8 +40,8 @@ const MusicRecomendation = (props) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('http://127.0.0.1:5000/getrandom');
-                // const response = await fetch('https://wisnudanuarta.pythonanywhere.com/getrandom');
+                // const response = await fetch('http://127.0.0.1:5000/getrandom');
+                const response = await fetch('https://wisnudanuarta.pythonanywhere.com/getrandom');
                 const data = await response.json();
                 setRandomSong(data);
             } catch (error) {

@@ -52,8 +52,8 @@ function App() {
         .join('&');
 
       // Fetch data from the endpoint with the constructed query string
-      fetch(`http://127.0.0.1:5000/getrecomendation?${queryString}`)
-        // fetch(`https://wisnudanuarta.pythonanywhere.com/getrecomendation?${queryString}`)
+      // fetch(`http://127.0.0.1:5000/getrecomendation?${queryString}`)
+      fetch(`https://wisnudanuarta.pythonanywhere.com/getrecomendation?${queryString}`)
         .then(res => res.json())
         .then(songs => {
           setSongs(songs);
@@ -70,11 +70,14 @@ function App() {
       <Splash />
       <Welcome />
       <div className={`relative ${about == true ? "close-page" : "open-page"}`}>
-        <div className="flex justify-between pt-[2vw] px-[2vw] portrait:px-[6vw] portrait:items-center portrait:py-[3vw]">
+        {/* Navbar */}
+        <div className="flex justify-between pt-[2vw] px-[2vw] portrait:px-[6vw] portrait:items-center portrait:py-[7vw]">
           <a className="text-[0.8vw] portrait:hidden hover:opacity-50 cursor-pointer" onClick={updateAbout}>About Us</a>
-          <h1 className="text-[2.4vw] font-bold normal-font portrait:text-[4vw]">AMPLIFY</h1>
+          <h1 className="text-[2.4vw] font-bold normal-font portrait:text-[6vw]">AMPLIFY</h1>
           <img src={icon} className="w-[2vw] portrait:w-[6vw]" alt="" />
         </div>
+
+        {/* Content */}
         <div className="w-full py-[3vw] flex
           portrait:flex-col-reverse
         ">
@@ -88,7 +91,8 @@ function App() {
         </div>
       </div>
 
-      <div className={`flex flex-col items-center justify-center py-[2vw] mb-[8vw] relative portrait:hidden bg-primary  ${about == false ? "hidden" : ""}`}>
+      {/* About Us */}
+      <div className={`flex flex-col items-center justify-center pt-[5vw] mb-[8vw] relative portrait:hidden bg-primary  ${about == false ? "hidden" : ""}`}>
         <h1 className='text-[2vw]'>ABOUT US</h1>
         <h2 className='text-[2vw] font-mono font-bold'>OUR TEAM</h2>
         <div className="flex w-full px-[12vw] pt-[6vw] pb-[4vw] justify-between">
@@ -107,8 +111,8 @@ function App() {
             <div className="wisnu flex items-center justify-center">
               <img alt="wisnu" src="https://intanurul04.alwaysdata.net/uas/4.png" className='w-[4vw] h-[4vw] mr-[2vw]' />
               <h3 className='text-[0.8vw]'>
-                <a href="#">I Ketut Andika Wisnu D.</a>
-                <p className='font-sans font-bold text-[1vw]'>162112133115</p>
+                <a href="#">Meri Agustina</a>
+                <p className='font-sans font-bold text-[1vw]'>164221025</p>
               </h3>
             </div>
           </div>
@@ -117,8 +121,8 @@ function App() {
             <div className="wisnu flex items-center justify-center">
               <img alt="wisnu" src="https://intanurul04.alwaysdata.net/uas/4.png" className='w-[4vw] h-[4vw] mr-[2vw]' />
               <h3 className='text-[0.8vw]'>
-                <a href="#">I Ketut Andika Wisnu D.</a>
-                <p className='font-sans font-bold text-[1vw]'>162112133115</p>
+                <a href="#">Intan Nurul Laily</a>
+                <p className='font-sans font-bold text-[1vw]'>164221060</p>
               </h3>
             </div>
           </div>
@@ -135,3 +139,4 @@ function App() {
 }
 
 export default App
+
